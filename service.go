@@ -223,8 +223,9 @@ func NewGeckoDriverService(path string, port int, opts ...ServiceOption) (*Servi
 
 func newService(cmd *exec.Cmd, urlPrefix string, port int, opts ...ServiceOption) (*Service, error) {
 	s := &Service{
-		port: port,
-		addr: fmt.Sprintf("http://localhost:%d%s", port, urlPrefix),
+		port:   port,
+		addr:   fmt.Sprintf("http://localhost:%d%s", port, urlPrefix),
+		output: NewDevNull(),
 	}
 	for _, opt := range opts {
 		if err := opt(s); err != nil {
